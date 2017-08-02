@@ -48,10 +48,13 @@ else
   exit 1
 fi
 
-# Source each of the colon-delimited files
+# Get KEY from environment variables
+KEY=$(cat "$ENV_DIR/KEY")
+
+# Run each of the colon-delimited files
 IFS=':' files=($buildpack_run)
 for i in ${!files[@]}; do
-  echo "Sourcing ${files[$i]}" | sed 's/^/-----> /'
+  echo "Sourcing ${files[$i]}" $KEY | sed 's/^/-----> /'
   source "${files[$i]}"
 done
 
