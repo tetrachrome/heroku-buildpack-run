@@ -58,3 +58,5 @@ for i in ${!files[@]}; do
   source "${files[$i]}"
 done
 
+# Collect static
+python manage.py collectstatic --noinput
