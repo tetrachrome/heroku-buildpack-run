@@ -60,9 +60,10 @@ KEY=$(cat "$ENV_DIR/KEY")
 IFS=':' files=($buildpack_run)
 for i in ${!files[@]}; do
   echo "Sourcing ${files[$i]}" $KEY | sed 's/^/-----> /'
-  bash "${files[$i]}"
+  bash "${files[$i]}" $KEY
 done
 
+export PYHONHOME=$BUILD_DIR/.heroku/python
 export PYTHONPATH=$BUILD_DIR/
 
 echo "-----> $ python $MANAGE_FILE collectstatic --noinput"
