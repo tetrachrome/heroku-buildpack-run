@@ -27,6 +27,10 @@ i() {
   sed 's/^/       /'
 }
 
+
+# Collect static
+python manage.py collectstatic --noinput
+
 # Rename variables for easier access in the user-specified file to source
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -57,6 +61,3 @@ for i in ${!files[@]}; do
   echo "Sourcing ${files[$i]}" $KEY | sed 's/^/-----> /'
   source "${files[$i]}"
 done
-
-# Collect static
-python manage.py collectstatic --noinput
